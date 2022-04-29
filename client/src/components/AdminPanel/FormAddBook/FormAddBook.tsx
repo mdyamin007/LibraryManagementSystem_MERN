@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import Select from "react-select";
 
 const FormAddBook = () => {
   const placeholders = ["Title", "Publish Year", "Pages", "Rating", "Quantity"];
+  const genreOptions = [
+    { value: "horror", label: "Horror" },
+    { value: "sci-fi", label: "Sci-fi" },
+    { value: "history", label: "History" },
+  ];
 
   return (
     <div className="w-full bg-green-300 py-20">
@@ -21,32 +27,13 @@ const FormAddBook = () => {
             <div className="w-1/2 my-4">
               <p className="font-bold italic text-white">Genres:</p>
             </div>
-            <div className="w-1/2 flex items-center flex-start space-x-3 text-white text-base">
-              <input
-                type="checkbox"
-                id="vehicle1"
-                name="vehicle1"
-                value="Bike"
+            <div className="w-1/2 ">
+              <Select
+                options={genreOptions}
+                isMulti={true}
+                placeholder={"Genre"}
+                className="w-full text-black mb-4"
               />
-              <label htmlFor="vehicle1"> Sci-fi</label>
-              <br />
-              <input
-                type="checkbox"
-                id="vehicle2"
-                name="vehicle2"
-                value="Car"
-              />
-              <label htmlFor="vehicle2"> Horror</label>
-              <br />
-              <input
-                type="checkbox"
-                id="vehicle3"
-                name="vehicle3"
-                value="Boat"
-              />
-              <label htmlFor="vehicle3"> History</label>
-              <br />
-              <br />
             </div>
 
             <input
@@ -64,11 +51,13 @@ const FormAddBook = () => {
               className="bg-gray-200 text-black text-lg my-4 px-6 py-4 rounded-md outline-none w-1/2"
               placeholder={placeholders[4]}
             />
-            <input
-              type="text"
-              className="bg-gray-200 text-black text-lg my-4 px-6 py-4 rounded-md outline-none w-1/2"
-              placeholder="Author"
-            />
+            <div className="w-1/2 mt-3">
+              <Select
+                placeholder={"Author"}
+                isMulti={true}
+                className="w-full"
+              />
+            </div>
             <input type="file" className="w-1/2 my-10" />
             <button
               type="submit"
