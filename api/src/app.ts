@@ -8,12 +8,16 @@ import booksRouter from './routers/book'
 import authorsRouter from './routers/author'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
+import cors from 'cors'
 
 dotenv.config({ path: '.env' })
 const app = express()
 
+//Cross origin 
+app.use(cors())
+
 // Express configuration
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 5002)
 
 // Global middleware
 app.use(apiContentType)

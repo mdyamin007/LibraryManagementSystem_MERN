@@ -6,6 +6,8 @@ export type UserDocument = Document & {
   email: string
   phone: string
   address: string
+  gender: string
+  image: string
   borrowBook: {
     bookId: string
     getBorrow: Date
@@ -33,6 +35,14 @@ const bookSchema = new mongoose.Schema({
     required: true,
   },
   address: {
+    type: String,
+    required: true,
+  },
+  gender: {
+    type: String,
+    required: true,
+  },
+  image: {
     type: String,
     required: true,
   },

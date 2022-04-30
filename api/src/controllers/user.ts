@@ -13,6 +13,7 @@ export const createUser = async (
     const user = new User(req.body)
     await UserService.create(user)
     res.json(user)
+    console.log(req.body)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

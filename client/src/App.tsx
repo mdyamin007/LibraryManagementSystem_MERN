@@ -4,6 +4,7 @@ import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 import BookInfo from "./pages/BookInfo";
 import AddBook from "./pages/AddBook";
+import AddAuthor from "./pages/AddAuthor";
 import UserProfile from "./pages/UserProfile";
 import UserInfo from "./pages/UserInfo";
 
@@ -14,9 +15,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/user_info" element={<UserInfo />} />
-        <Route path="/book_info" element={<BookInfo />} />
+        <Route path="/Author_info" element={<BookInfo />} />
         <Route path="/add_book" element={<AddBook />} />
         <Route path="/user_profile" element={<UserProfile />} />
+        <Route path="/add_author" element={<AddAuthor />} />
       </Routes>
     </BrowserRouter>
   );
