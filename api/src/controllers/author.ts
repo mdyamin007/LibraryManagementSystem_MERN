@@ -60,7 +60,7 @@ export const deleteAuthor = async (
   }
 }
 
-// GET /movies/:movieId
+// GET /author/:movieId
 export const findById = async (
   req: Request,
   res: Response,

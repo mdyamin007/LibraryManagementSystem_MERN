@@ -4,7 +4,7 @@ import mongoose, { Document } from 'mongoose'
 export type BookDocument = Document & {
   title: string
   publishedYear: number
-  genres: object[]
+  genres: string[]
   pages: number
   rating: number
   quantity: number
@@ -22,10 +22,7 @@ const bookSchema = new mongoose.Schema({
     required: true,
     min: 1800,
   },
-  genres: [new mongoose.Schema({
-    label: String,
-    value: String
-  })],
+  genres: [String],
   pages: {
     type: Number,
     required: true,

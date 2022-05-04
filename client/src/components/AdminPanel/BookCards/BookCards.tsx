@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SingleBook from "./SingleBook";
 import SearchBar3 from "../SearchBar/SearchBar2";
+import api from "../../../api";
+import { AxiosResponse } from "axios";
+
+interface IBook {
+  _id: string;
+  title: string;
+  author: string[];
+}
 
 const BookCards = () => {
+  const [books, setBooks] = useState<IBook[]>([]);
+
+  useEffect(() => {
+    const getBooks = async () => {
+      const res: AxiosResponse<IBook[]> = await api.get("api/v1/books");
+      const data: IBook[] = res.data;
+      setBooks(data);
+    };
+    getBooks(); //getting all book info from the backend
+  }, []);
+
   return (
     <div className="container mx-auto">
       <div className="w-full mt-20 mb-10 flex items-center justify-center">
@@ -14,15 +33,9 @@ const BookCards = () => {
         </button>
       </div>
       <div className="grid grid-cols-4 gap-8 my-4">
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
-        <SingleBook title={"Harry potter"} author={"J.K. Rowling"} />
+        {books.map((book: IBook) => (
+          <SingleBook key={book._id} title={book.title} author={book.author} />
+        ))}
       </div>
     </div>
   );
