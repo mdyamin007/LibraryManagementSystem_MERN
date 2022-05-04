@@ -7,6 +7,7 @@ import AddBook from "./pages/AddBook";
 import AddAuthor from "./pages/AddAuthor";
 import UserProfile from "./pages/UserProfile";
 import UserInfo from "./pages/UserInfo";
+import AddUser from "./pages/AddUser";
 
 function App() {
   return (
@@ -15,10 +16,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/user_info" element={<UserInfo />} />
-        <Route path="/Author_info" element={<BookInfo />} />
+        <Route path="/book_info" element={<BookInfo />} />
+
         <Route path="/add_book" element={<AddBook />} />
         <Route path="/user_profile" element={<UserProfile />} />
         <Route path="/add_author" element={<AddAuthor />} />
+        <Route path="/add_user" element={<AddUser />} />
       </Routes>
     </BrowserRouter>
   );
