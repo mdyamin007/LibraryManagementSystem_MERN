@@ -3,6 +3,7 @@ import SingleBook from "./SingleBook";
 import SearchBar3 from "../SearchBar/SearchBar2";
 import api from "../../../api";
 import { AxiosResponse } from "axios";
+import { useAppSelector } from "../../../hooks/reduxTypes";
 
 interface IBook {
   _id: string;
@@ -11,16 +12,36 @@ interface IBook {
 }
 
 const BookCards = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [books, setBooks] = useState<IBook[]>([]);
+
+  const { user } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     const getBooks = async () => {
-      const res: AxiosResponse<IBook[]> = await api.get("api/v1/books");
-      const data: IBook[] = res.data;
-      setBooks(data);
+      try {
+        const res: AxiosResponse<IBook[]> = await api.get("api/v1/books", {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        });
+        const data: IBook[] = res.data;
+        setBooks(data);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
     };
     getBooks(); //getting all book info from the backend
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex p-20 items-center justify-center">
+        <p>Loading....</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto">
@@ -33,9 +54,14 @@ const BookCards = () => {
         </button>
       </div>
       <div className="grid grid-cols-4 gap-8 my-4">
-        {books.map((book: IBook) => (
-          <SingleBook key={book._id} title={book.title} author={book.author} />
-        ))}
+        {books &&
+          books.map((book: IBook) => (
+            <SingleBook
+              key={book._id}
+              title={book.title}
+              author={book.author}
+            />
+          ))}
       </div>
     </div>
   );

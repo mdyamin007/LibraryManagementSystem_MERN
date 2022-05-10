@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../../../api";
 import AddedUser from "../AddedUser/AddedUser";
+import { toast } from "react-toastify";
 
 const Addeduser = () => {
   const [firstName, setFirstName] = useState<string>("");
@@ -29,6 +30,7 @@ const Addeduser = () => {
       setUserAdded(true);
     } catch (err) {
       console.error(err);
+      toast.error("The user already exists!");
     }
   };
 
@@ -45,7 +47,7 @@ const Addeduser = () => {
   };
 
   const handleFileInputChange = async (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (!e.target.files) return;
 
